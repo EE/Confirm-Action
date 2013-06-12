@@ -1,9 +1,9 @@
 (function ($) {
-    'use strict';
+    "use strict";
 
     $.fn.confirmAction = function (options, callback) {
 
-        if (typeof(options) === 'function') {
+        if (typeof(options) === "function") {
             callback = options;
             options = {};
         }
@@ -12,16 +12,17 @@
 
         return this.each(function () {
 
-            var elementSettings = $.extend({}, globalSettings, $(this).data());
+            var elementSettings = $.extend({}, globalSettings, $(this).data()),
+                self;
 
             if (elementSettings.url == null) {
 
                 return this;
             }
 
-            var self = $(this);
+            self = $(this);
 
-            self.on('click', function (event) {
+            self.on("click", function (event) {
                 event.preventDefault();
 
                 if (confirm(elementSettings.message)) {
@@ -32,7 +33,7 @@
                     }).done(function (response) {
 
                             // check if callback is a function
-                            if (typeof callback === 'function') {
+                            if (typeof callback === "function") {
                                 callback.call(self, response, self);
                             }
                         });
@@ -45,7 +46,7 @@
 
     $.fn.confirmAction.defaults = {
         url: null,
-        message: 'Are you sure?',
-        type: 'GET'
+        message: "Are you sure?",
+        type: "GET"
     };
 })(jQuery);
